@@ -11,14 +11,14 @@ namespace MvcWidget1.Controllers
         //
         // GET: /HelloWorld/
 
-        public string Index()
+        public ActionResult Index()
         {
-            return "This is my <b>default</b> response.";
+            return View();
         }
 
-        public string Welcome()
+        public string Welcome(string name)
         {
-            return "Welcome to <b>Hello World<b/> response.";
+            return HttpUtility.HtmlEncode(String.Format("Hello {0}. It is now {1}", name, DateTime.Now.ToShortDateString()));
         }
 
 
