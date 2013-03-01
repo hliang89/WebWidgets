@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebWidgets", "WebWidgets\WebWidgets.csproj", "{FD4402A8-1571-4991-AE68-71BF9F832B2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcWidget1", "MvcWidget1\MvcWidget1.csproj", "{2C67A878-DCDD-45BA-8F7E-4C6BEF826D90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcWidget1.Tests", "MvcWidget1.Tests\MvcWidget1.Tests.csproj", "{0E557F74-71A9-46FA-9E38-1031C72F9845}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{FD4402A8-1571-4991-AE68-71BF9F832B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD4402A8-1571-4991-AE68-71BF9F832B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD4402A8-1571-4991-AE68-71BF9F832B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C67A878-DCDD-45BA-8F7E-4C6BEF826D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C67A878-DCDD-45BA-8F7E-4C6BEF826D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C67A878-DCDD-45BA-8F7E-4C6BEF826D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C67A878-DCDD-45BA-8F7E-4C6BEF826D90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E557F74-71A9-46FA-9E38-1031C72F9845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E557F74-71A9-46FA-9E38-1031C72F9845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E557F74-71A9-46FA-9E38-1031C72F9845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E557F74-71A9-46FA-9E38-1031C72F9845}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
