@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Data.Entity;
+using MvcWidget1.Models;
 
 namespace MvcWidget1
 {
@@ -16,6 +18,8 @@ namespace MvcWidget1
     {
         protected void Application_Start()
         {
+            Database.SetInitializer<MovieDBContext>(new MovieInitializer());
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

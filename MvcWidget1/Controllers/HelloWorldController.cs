@@ -16,9 +16,13 @@ namespace MvcWidget1.Controllers
             return View();
         }
 
-        public string Welcome(string name)
+        public ActionResult Welcome(string name)
         {
-            return HttpUtility.HtmlEncode(String.Format("Hello {0}. It is now {1}", name, DateTime.Now.ToShortDateString()));
+            ViewBag.Name = (String.IsNullOrEmpty(name)) ? "User" : name;
+            ViewBag.Name = name ?? "User";
+            ViewBag.DateNow = DateTime.Now.ToShortTimeString();
+
+            return View();
         }
 
 
