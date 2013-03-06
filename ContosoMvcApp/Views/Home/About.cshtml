@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<article>
+    <p>
+        University of Contoso was founded in 1962 in Phoenix, Arizona.
+    </p>
+
+    <p>
+        The school has a long tradition of excellence in academia and student life.
+    </p>
+
+    <p>
+        This is the web portal of the school for the student and faculty body.
+    </p>
+</article>
+
+<aside>
+    <h3>Navigation</h3>
+    <p>
+        Useful links
+    </p>
+    <ul>
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    </ul>
+</aside>
