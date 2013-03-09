@@ -18,8 +18,7 @@ namespace ContosoMvcApp.Controllers
 
         public ActionResult Index(string sortOrder, string searchString)
         {
-
-            ViewBag.DateSortParam = String.IsNullOrWhiteSpace(sortOrder)? "Name desc":"";
+            ViewBag.NameSortParam = String.IsNullOrWhiteSpace(sortOrder)? "Name desc":"";
             ViewBag.DateSortParam = sortOrder == "Date" ? "Date desc" : "Date";
 
             var students = from s in db.Students select s;
@@ -27,6 +26,22 @@ namespace ContosoMvcApp.Controllers
             if (!String.IsNullOrWhiteSpace(searchString))
             {
                 students = students.Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper()) || s.LastName.ToLower().Contains(searchString.ToLower()));
+            }
+
+            switch (sortOrder)
+            {
+                case "Date desc":
+                    students = students.OrderByDescending(s => s.EnrollmentDate);
+                    break;
+                case "Date":
+                    students = students.OrderBy(s => s.EnrollmentDate);
+                    break;
+                case "Name desc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
             }
             return View(students.ToList());
         }
