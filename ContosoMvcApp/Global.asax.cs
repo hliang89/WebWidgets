@@ -6,6 +6,10 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Data.Entity;
+using ContosoMvcApp.DAL;
+using ContosoMvcApp.Models;
+
 
 namespace ContosoMvcApp
 {
@@ -16,6 +20,8 @@ namespace ContosoMvcApp
     {
         protected void Application_Start()
         {
+            Database.SetInitializer<SchoolDBContext>(new SchoolInitializer());
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

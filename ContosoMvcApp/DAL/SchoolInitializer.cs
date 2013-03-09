@@ -21,10 +21,10 @@ namespace ContosoMvcApp.DAL
                 new Student { FirstMidName = "Peggy",    LastName = "Justice",   EnrollmentDate = DateTime.Parse("2001-09-01") },
                 new Student { FirstMidName = "Laura",    LastName = "Norman",    EnrollmentDate = DateTime.Parse("2003-09-01") },
                 new Student { FirstMidName = "Nino",     LastName = "Olivetto",  EnrollmentDate = DateTime.Parse("2005-09-01") }
-            };
-            context.SaveChanges();
+            };            
 
             Students.ForEach(s => context.Students.Add(s));
+            context.SaveChanges();
 
             var Courses = new List<Course>()
             {
@@ -58,8 +58,6 @@ namespace ContosoMvcApp.DAL
 
             enrollments.ForEach(e => context.Enrollments.Add(e));
             context.SaveChanges();
-
-
         }
     }
 }
