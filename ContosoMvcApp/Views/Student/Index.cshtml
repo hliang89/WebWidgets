@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ContosoMvcApp.Models.Student>
+﻿@model PagedList.IPagedList<ContosoMvcApp.Models.Student>
+
 
 @{
     ViewBag.Title = "Index";
@@ -12,18 +13,18 @@
 
 @using (Html.BeginForm())
 {
-    <p>Search by last name: @Html.TextBox("SearchString")<input type="submit" value="Search" /></p>
+    <p>Search by last name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)<input type="submit" value="Search" /></p>
 }
 <table>
     <tr>
         <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam })
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, searchString = ViewBag.CurrentFilter})
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstMidName)
+            First Name
         </th>
         <th>
-            @Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.DateSortParam })
+            @Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.DateSortParam, searchString = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
@@ -48,3 +49,34 @@
 }
 
 </table>
+
+<div>
+    Page @(Model.PageCount < Model.PageNumber ? 1 : Model.PageNumber)
+    of @Model.PageCount
+
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "Index", new {page = 1, sortOrder = ViewBag.CurrentOrder, searchString = ViewBag.CurrentFilter})
+        @Html.Raw(" ");
+        @Html.ActionLink("< Prev", "Index", new {page = Model.PageNumber -1, sortOrder = ViewBag.CurrentOrder, searchString= ViewBag.CurrentFilter})
+    }
+    else
+    {
+        @:<<
+        @Html.Raw(" ");
+        @:< Prev
+    }
+
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentOrder, searchString = ViewBag.CurrentFilter })
+        @Html.Raw(" ");
+        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOroder= ViewBag.CurrentOrder, searchString = ViewBag.CurrentFilter})
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw(" ");
+        @:>>
+    }
+</div>

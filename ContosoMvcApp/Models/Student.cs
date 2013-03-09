@@ -11,7 +11,7 @@ namespace ContosoMvcApp.Models
         public int ID { get; set; }
         
         [Required(ErrorMessage="Last Name is required")]
-        [Display(Name="First Name")]
+        [Display(Name="Last Name")]
         [MaxLength(50)]
         public string LastName { get; set; }
 

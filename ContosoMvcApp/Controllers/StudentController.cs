@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ContosoMvcApp.Models;
+using PagedList;
 
 namespace ContosoMvcApp.Controllers
 {
@@ -16,10 +17,22 @@ namespace ContosoMvcApp.Controllers
         //
         // GET: /Student/
 
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.NameSortParam = String.IsNullOrWhiteSpace(sortOrder)? "Name desc":"";
             ViewBag.DateSortParam = sortOrder == "Date" ? "Date desc" : "Date";
+
+            ViewBag.CurrentSort = sortOrder;
+
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+            ViewBag.CurrenFilter = searchString;
 
             var students = from s in db.Students select s;
 
@@ -43,7 +56,11 @@ namespace ContosoMvcApp.Controllers
                     students = students.OrderBy(s => s.LastName);
                     break;
             }
-            return View(students.ToList());
+
+            int pageSize = 3;
+            int pageNumber = page ?? 1;
+
+            return View(students.ToPagedList(pageNumber, pageSize));           
         }
 
         //
