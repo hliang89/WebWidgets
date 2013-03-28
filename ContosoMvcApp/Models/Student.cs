@@ -8,7 +8,7 @@ namespace ContosoMvcApp.Models
 {
     public class Student
     {
-        public int ID { get; set; }
+        public int StudentID { get; set; }
         
         [Required(ErrorMessage="Last Name is required")]
         [Display(Name="Last Name")]

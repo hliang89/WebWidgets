@@ -1,5 +1,4 @@
-﻿@model PagedList.IPagedList<ContosoMvcApp.Models.Student>
-
+﻿@model IEnumerable<ContosoMvcApp.Models.Student>
 
 @{
     ViewBag.Title = "Index";
@@ -10,21 +9,16 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-@using (Html.BeginForm())
-{
-    <p>Search by last name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)<input type="submit" value="Search" /></p>
-}
 <table>
     <tr>
         <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, searchString = ViewBag.CurrentFilter})
+            @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
-            First Name
+            @Html.DisplayNameFor(model => model.FirstMidName)
         </th>
         <th>
-            @Html.ActionLink("Enrollment Date", "Index", new { sortOrder = ViewBag.DateSortParam, searchString = ViewBag.CurrentFilter })
+            @Html.DisplayNameFor(model => model.EnrollmentDate)
         </th>
         <th></th>
     </tr>
@@ -41,42 +35,11 @@
             @Html.DisplayFor(modelItem => item.EnrollmentDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.StudentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StudentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StudentID })
         </td>
     </tr>
 }
 
 </table>
-
-<div>
-    Page @(Model.PageCount < Model.PageNumber ? 1 : Model.PageNumber)
-    of @Model.PageCount
-
-    @if (Model.HasPreviousPage)
-    {
-        @Html.ActionLink("<<", "Index", new {page = 1, sortOrder = ViewBag.CurrentOrder, searchString = ViewBag.CurrentFilter})
-        @Html.Raw(" ");
-        @Html.ActionLink("< Prev", "Index", new {page = Model.PageNumber -1, sortOrder = ViewBag.CurrentOrder, searchString= ViewBag.CurrentFilter})
-    }
-    else
-    {
-        @:<<
-        @Html.Raw(" ");
-        @:< Prev
-    }
-
-    @if (Model.HasNextPage)
-    {
-        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentOrder, searchString = ViewBag.CurrentFilter })
-        @Html.Raw(" ");
-        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOroder= ViewBag.CurrentOrder, searchString = ViewBag.CurrentFilter})
-    }
-    else
-    {
-        @:Next >
-        @Html.Raw(" ");
-        @:>>
-    }
-</div>

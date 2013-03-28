@@ -9,104 +9,109 @@ using ContosoMvcApp.Models;
 
 namespace ContosoMvcApp.Controllers
 {
-    public class StudentController : Controller
+    public class CourseController : Controller
     {
         private SchoolDBContext db = new SchoolDBContext();
 
         //
-        // GET: /Student/
+        // GET: /Course/
 
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            var courses = db.Courses.Include(c => c.Department);
+            return View(courses.ToList());
         }
 
         //
-        // GET: /Student/Details/5
+        // GET: /Course/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            Student student = db.Students.Find(id);
-            if (student == null)
+            Course course = db.Courses.Find(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(course);
         }
 
         //
-        // GET: /Student/Create
+        // GET: /Course/Create
 
         public ActionResult Create()
         {
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "DepartmentID");
             return View();
         }
 
         //
-        // POST: /Student/Create
+        // POST: /Course/Create
 
         [HttpPost]
-        public ActionResult Create(Student student)
+        public ActionResult Create(Course course)
         {
             if (ModelState.IsValid)
             {
-                db.Students.Add(student);
+                db.Courses.Add(course);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(student);
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "DepartmentID", course.DepartmentID);
+            return View(course);
         }
 
         //
-        // GET: /Student/Edit/5
+        // GET: /Course/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            Student student = db.Students.Find(id);
-            if (student == null)
+            Course course = db.Courses.Find(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "DepartmentID", course.DepartmentID);
+            return View(course);
         }
 
         //
-        // POST: /Student/Edit/5
+        // POST: /Course/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Student student)
+        public ActionResult Edit(Course course)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
+                db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(student);
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "DepartmentID", course.DepartmentID);
+            return View(course);
         }
 
         //
-        // GET: /Student/Delete/5
+        // GET: /Course/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            Student student = db.Students.Find(id);
-            if (student == null)
+            Course course = db.Courses.Find(id);
+            if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(course);
         }
 
         //
-        // POST: /Student/Delete/5
+        // POST: /Course/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
+            Course course = db.Courses.Find(id);
+            db.Courses.Remove(course);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
